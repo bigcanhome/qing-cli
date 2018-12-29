@@ -1,0 +1,15 @@
+{
+  "name": "zac",
+  "version": "1.0.0",
+  "description": "> 技术赋能，助力开发",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@git.dev.tencent.com:anzhiqing/zac.git"
+  },
+  "author": "aio",
+  "license": "ISC"
+}

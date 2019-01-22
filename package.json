@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "> 技术赋能，助力开发",
   "main": "index.js",
-  "bin": {
-    "zac": "./index.js"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,9 +11,5 @@
     "url": "git@git.dev.tencent.com:anzhiqing/zac.git"
   },
   "author": "aio",
-  "license": "ISC",
-  "dependencies": {
-    "chalk": "^2.4.2",
-    "commander": "^2.19.0"
-  }
+  "license": "ISC"
 }

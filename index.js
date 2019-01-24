@@ -2,7 +2,6 @@
 
 const program = require('commander');
 const package = require('./package.json');
-const chalk = require('chalk');
 
 const { build } = require('./bin');
 

@@ -1,8 +1,10 @@
 #!/usr/bin/env node
-console.log(process.cwd());
+
+const log = require('../util/log');
 
 const build = (option) => {
-  console.log(option)
+const log = require('../util/log');
+log.code({content: option.page});
 }
 
 module.exports = {

@@ -8,9 +8,12 @@ const { build } = require('./bin');
 process.title = 'zac';
 
 program
-  .command('build')
-  .description('build your page, build [page]')
+  .version(package.version, '-v, --version')
+
+program
+  .command('build [page]')
   .alias('b')
+  .description('build your page, build [page]')
   .action((page) => {
     build({
       page,

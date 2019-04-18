@@ -1,7 +1,6 @@
 const ACTION = {
   BUILD: 'build',
   WATCH: 'watch',
-  SPEED: 'speed',
   DEPLOY: 'deploy',
   CREATE: 'create',
   NEW: 'new',

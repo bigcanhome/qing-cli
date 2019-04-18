@@ -1,22 +1,36 @@
-#!/usr/bin/env node
+const config = require('./config/index');
+const pkg = require('./package.json');
 
-const program = require('commander');
-const package = require('./package.json');
+const xlog = require('./util/xlog');
+const {
+  requireIfExsit,
+  requireMiddleware,
+} = require('./util/index');
 
-const { build } = require('./bin');
+module.exports = function (options) {
+  xlog.info(c => c.green('｡:.ﾟヽ(｡◕‿◕｡)ﾉﾟ.:｡+ﾟ'));
 
-process.title = 'zac';
+  requireMiddleware('before-run', { pkg, options });
 
-program
-  .version(package.version, '-v, --version')
+  xlog.info('Using muse', c => c.magenta(config('ENV.root')));
+  xlog.info('Muse version', c => c.magenta(config('ENV.version')));
+  xlog.info('Current directory', c => c.magenta(config('ENV.cwd')));
 
-program
-  .command('build [page]')
-  .alias('b')
-  .description('build your page, build [page]')
-  .action((page) => {
-    build({
-      page,
-    })
+  requireMiddleware('before-task', config());
+
+  process.chdir(config('PROJECT.working_path'));
+
+  xlog.info('Change working path to', c => c.magenta(config('PROJECT.working_path')));
+
+  const processor = requireIfExsit(__dirname, `processor/${config('OPTIONS.action')}`);
+  if (!processor) {
+    xlog.error(`${config('OPTIONS.action')} processor not found! `);
+    process.exit(-1);
+  }
+
+  processor().on('close', (CODE) => {
+    requireMiddleware('after-task', Object.assign(config(), {
+      CODE,
+    }));
   });
-program.parse(process.argv);
+};

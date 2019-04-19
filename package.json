@@ -1,5 +1,5 @@
 {
-  "name": "qing",
+  "name": "qing-cli",
   "version": "1.0.0",
   "description": "> 技术赋能，助力开发",
   "bin": {

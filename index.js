@@ -8,7 +8,7 @@ const {
 } = require('./util/index');
 
 module.exports = function (options) {
-  xlog.info(c => c.green('｡:.ﾟヽ(｡◕‿◕｡)ﾉﾟ.:｡+ﾟ'));
+  xlog.info(c => c.green('********start********'));
 
   requireMiddleware('before-run', { pkg, options });
 

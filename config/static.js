@@ -1,12 +1,3 @@
-const ACTION = {
-  BUILD: 'build',
-  WATCH: 'watch',
-  DEPLOY: 'deploy',
-  CREATE: 'create',
-  NEW: 'new',
-  LINT: 'lint',
-};
-
 const WEBPACK = {
   baseExclude: /(node_modules|bower_components)/,
   browserList: ['iOS >= 8.1.2', 'Android >= 4.4', 'ie >= 9', ' > 0.25%'],
@@ -16,6 +7,5 @@ const WEBPACK = {
 };
 
 module.exports = {
-  ACTION,
   WEBPACK,
 };

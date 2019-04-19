@@ -5,14 +5,51 @@ const package = require('../package.json');
 
 process.title = 'qing';
 
+
+
+const commands = {
+  'watch': {
+    command: 'watch [page]', // 监听一个页面；如果page === '' 则判定 要监听当前这个目录的项目
+    description: '监听页面, watch [page]',
+    action: function (page) {
+      console.log('watch' + page);
+    }
+  },
+  'build': {
+    command: 'build [page]',
+    description: '构建页面, build [page]',
+    action: function (page) {
+      console.log('build' + page);
+    }
+  },
+  'deploy': {
+    command: 'deploy [page]',
+    description: '部署页面，资源上传cdn 移到配置中的online目录, deploy [template]',
+    action: function (page) {
+      console.log('deploy' + page);
+    }
+  },
+  'init': {
+    command: 'init [page]',
+    description: '创建项目模板（预设和自定义）, init [template]',
+    action: function (page) {
+      console.log('init' + page);
+    }
+  },
+}
 program
   .version(package.version, '-v, --version')
 
-program
-  .command('build [page]')
-  .alias('b')
-  .description('build your page, build [page]')
-  .action((page) => {
-    console.log('build' + page);
-  });
+Object.keys(commands).forEach(cmd => {
+  program
+    .command(commands[cmd].command)
+    .description(commands[cmd].description)
+    .action(commands[cmd].action);
+});
+
+const argv = process.argv;
+if (!commands[argv[2]] && argv[2] !== 'version' && argv[2] !== '-v') {
+  program.help();
+}
+
 program.parse(process.argv);

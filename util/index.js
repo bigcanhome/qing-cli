@@ -7,7 +7,7 @@ function readConfig(...args) {
       try {
         res = require(filePath);
       } catch (err) { }
-      config = Object.assign(config, {});
+      config = Object.assign(config, res);
     }
     return config;
   })

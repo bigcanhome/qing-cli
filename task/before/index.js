@@ -1,0 +1,5 @@
+
+function getWebpackConfig() { }
+module.exports = {
+
+}

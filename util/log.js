@@ -46,7 +46,7 @@ function success(...args) {
   console.log(...args);
 }
 
-function code({
+function box({
   content = [],
   options = {},
 }) {
@@ -63,7 +63,7 @@ function code({
 }
 
 module.exports = {
-  code,
+  box,
   info,
   warning,
   error,

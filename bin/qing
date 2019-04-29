@@ -2,14 +2,15 @@
 
 const program = require('commander');
 const package = require('../package.json');
+const path = require('path');
 
-process.title = 'qing';
+process.title = 'QING';
 
 const launcher = options => require('../index')(options);
 
 const commands = {
   'watch': {
-    command: 'watch [page] [type]', // 监听一个页面；如果page === '' 则判定 要监听当前这个目录的项目
+    command: 'watch [page]', // 监听一个页面；如果page === '' 则判定 要监听当前这个目录的项目
     description: '监听页面, watch [page]',
   },
   'build': {
@@ -35,9 +36,21 @@ Object.keys(commands).forEach(action => {
   program
     .command(commands[action].command)
     .description(commands[action].description)
-    .option('-t --type', '普通模式还是sdk')
-    .action((type = '', page = '') => {
-      launcher({ type, page, action, argv })
+    .option('-t --type <type>', '普通模式还是sdk')
+    .action((page = '', cmd) => {
+      const QING_ENV = {
+        name: package.name,
+        version: package.version,
+        cwd: process.cwd(),
+        user: process.env.USER,
+        _start: Date.now(),
+        nodeRoot: argv[0],
+        qing: argv[1],
+        page,
+        action,
+        type: cmd.type
+      };
+      launcher({ QING_ENV })
     });
 });
 

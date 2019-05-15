@@ -1,4 +1,6 @@
 module.exports = {
+  mode: 'all', // all,page,sdk
+  except: ['common', 'dist'], // 全部打包时排除的目录
   devPort: '8080',
   proxy: {},
   // 需要走编译的node_modules，一般为源码引入，ES6模块

@@ -10,6 +10,9 @@ module.exports = {
     'node_modules/vue-open-popup',
     'node_modules/@pscp'
   ],
-  buildDist: 'dist/build', // build模式输出目录
-  deployDist: 'dist/online', // deploy模式输出目录
+  workPath: '{root}/websrc/', // 工作目录
+  pagePath: '{work}/{page}/', // 具体某个页面项目
+  buildDist: '{root}/src/build/{page}/', // build模式输出目录
+  prodDist: '{root}/src/online/{page}/', // prod模式输出目录
+  deployHost: '',
 }

@@ -10,12 +10,10 @@ const {
 module.exports = function (options) {
   const { QING_ENV: { nodeRoot, qing, cwd } } = options;
 
-  requireTask('before/', { pkg, options });
-
   xlog.box(
     {
       content: [
-        '-----欢迎使用Qing[' + pkg.version + '](Power By Webpack)-----',
+        '-----Welcome to use Qing[' + pkg.version + '](Power By Webpack)-----',
       ]
     }
   )
@@ -23,6 +21,7 @@ module.exports = function (options) {
   xlog.info('Using ' + pkg.name, c => c.magenta(qing));
   xlog.info('Current directory', c => c.magenta(cwd));
 
+  requireTask('before/', { pkg, options });
 
 
 };

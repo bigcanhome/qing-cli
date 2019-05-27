@@ -17,9 +17,13 @@ const commands = {
     command: 'build [page]',
     description: '构建页面, build [page]',
   },
+  'prod': {
+    command: 'prod [page]',
+    description: '资源上传cdn 移到配置中的online目录, prod [page]',
+  },
   'deploy': {
     command: 'deploy [page]',
-    description: '部署页面，资源上传cdn 移到配置中的online目录, deploy [template]',
+    description: '部署页面，资源上传cdn 代码部署到指定接口',
   },
   'init': {
     command: 'init [page]',

@@ -1,6 +1,6 @@
 {
   "name": "qing-cli",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "> 技术赋能，助力开发",
   "bin": {
     "qing": "./bin/qing"

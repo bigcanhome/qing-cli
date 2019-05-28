@@ -3,17 +3,19 @@ const path = require('path');
 
 function readConfig(...args) {
   let config = {};
+  let isFile = false;
   args.forEach(arg => {
     const filePath = path.resolve(...arg);
     if (fs.existsSync(filePath)) {
       let res = {};
+      isFile = true;
       try {
         res = require(filePath);
       } catch (err) { }
       config = Object.assign(config, res);
     }
   })
-  return config;
+  return isFile ? config : null;
 }
 
 // require一个文件，不存在返回null

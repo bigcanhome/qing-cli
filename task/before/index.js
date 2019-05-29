@@ -9,16 +9,6 @@ const {
 
 const checkNodeVersion = require('./checkNodeVersion');
 const configFild = 'qing.config.js';
-function getWebpackConfig(options) {
-  const { QING_ENV: { qing, cwd, page, action } } = options;
-  const userConfigPaths = [
-    [qing, '../../config/defaults', configFild],
-    [cwd, configFild],
-    [cwd, './' + page, configFild],
-  ];
-
-  return readConfig(...userConfigPaths)
-}
 
 function getPath(options) {
   const { QING_ENV: { qing, cwd, } } = options;

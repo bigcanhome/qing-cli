@@ -1,0 +1,58 @@
+#!/usr/bin/env node
+
+const yarg = require('yargs');
+const package = require('../package.json');
+const path = require('path');
+
+const launcher = options => require('../index')(options);
+
+yarg.usage('$0 <command> [options]');
+
+yarg.command(
+  'watch [name]',
+  '',
+  yargs => {
+    yargs.positional('name', {
+      type: 'string',
+      default: 'all',
+      describe: 'Name of the page'
+    });
+  },
+  argv => {
+    console.log(argv);
+    launcher({
+      action: 'WATCH'
+    });
+  }
+);
+
+const commands = {
+  watch: {
+    example: ('$0 watch', 'Build all pages with production mode'),
+    command: 'watch [name]', // 监听一个页面；如果page === '' 则判定 要监听当前这个目录的项目
+    description: '监听页面, watch [page]'
+  },
+  build: {
+    command: 'build [name]',
+    description: '构建页面, build [page]'
+  },
+  prod: {
+    command: 'prod [name]',
+    description: '资源上传cdn 移到配置中的online目录, prod [page]'
+  },
+  deploy: {
+    command: 'deploy [name]',
+    description: '部署页面，资源上传cdn 代码部署到指定接口'
+  },
+  init: {
+    command: 'init [name]',
+    description: '创建项目模板, init [template]'
+  }
+};
+
+yarg
+  .help('h')
+  .alias('h', 'help')
+  .version(package.version)
+  .alias('v', 'version')
+  .demandCommand().argv;

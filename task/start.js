@@ -1,5 +1,5 @@
 const before = require('./before');
-const _ = require('lodash');
+const { merge } = require('lodash');
 const { requireConfig } = require('../utils');
 
 module.exports = function(options) {
@@ -13,7 +13,7 @@ module.exports = function(options) {
   }
 
   const defaultCfg = require('../config/default/qing.config');
-  const cfg = _.merge(defaultCfg, requireConfig(cfgArr).data);
+  const cfg = merge(defaultCfg, requireConfig(cfgArr).data);
   options.cfg = cfg;
 
   before(options);

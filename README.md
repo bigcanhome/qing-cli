@@ -1,15 +1,34 @@
-# qing-cli
+<h1 align="center"> Qing </h1>
+<p align="center">
+  <b >Qing be a CLI</b>
+</p>
 
-## 基本功能
+<br>
 
-> - webpack
-> - babel转换
-> - polyfill
-> - less, sass 支持
-> - 代码的压缩混淆
-> - 图片压缩
-> - 多种模板的支持(自行扩展)
-> - 主流框架的支持（需要使用相应模板）
-> - 灵活配置
-> - 文件和目录的约束
+[![NPM version][npm-image]][npm-url]
 
+## Description :
+
+Yargs helps you build interactive command line tools, by parsing arguments and generating an elegant user interface.
+
+It gives you:
+
+- commands and (grouped) options (`my-program.js serve --port=5000`).
+- a dynamically generated help menu based on your arguments.
+
+- bash-completion shortcuts for commands and options.
+- and [tons more](/docs/api.md).
+
+## Installation
+
+Stable version:
+
+```bash
+npm i qing-cli -g
+```
+
+## Usage :
+
+### Build
+
+### JS-SDK

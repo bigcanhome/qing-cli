@@ -1,51 +1,40 @@
 #!/usr/bin/env node
 
 const yarg = require('yargs');
+const path = require('path');
+
 const package = require('../package.json');
-const action = require('../config/static').ACTION;
+const { ACTION } = require('../config/static');
+const { commands } = require('../config/static');
 
 const launcher = options => require('../index')(options);
 
 yarg.usage('$0 <command> [options]');
 
-yarg.command(
-  'watch [name]',
-  '',
-  yargs => {
-    yargs.positional('name', {
-      type: 'string',
-      default: 'all',
-      describe: 'Name of the page'
-    });
-  },
-  argv => {
-    launcher(action.WATCH);
-  }
-);
-
-const commands = {
-  watch: {
-    example: ('$0 watch', 'Build all pages with production mode'),
-    command: 'watch [name]', // 监听一个页面；如果page === '' 则判定 要监听当前这个目录的项目
-    description: '监听页面, watch [page]'
-  },
-  build: {
-    command: 'build [name]',
-    description: '构建页面, build [page]'
-  },
-  prod: {
-    command: 'prod [name]',
-    description: '资源上传cdn 移到配置中的online目录, prod [page]'
-  },
-  deploy: {
-    command: 'deploy [name]',
-    description: '部署页面，资源上传cdn 代码部署到指定接口'
-  },
-  init: {
-    command: 'init [name]',
-    description: '创建项目模板, init [template]'
-  }
-};
+Object.keys(commands).forEach(action => {
+  yarg.command(
+    commands[action].command,
+    commands[action].description,
+    yargs => {
+      yargs.positional('name', {
+        type: 'string',
+        default: 'none',
+        describe: ''
+      });
+    },
+    argv => {
+      launcher(
+        Object.assign(
+          {
+            params: { name: argv.name, jssdk: !!argv.j, isCurrDir: argv.name === 'none' },
+            version: package.version
+          },
+          ACTION[action]
+        )
+      );
+    }
+  );
+});
 
 yarg
   .help('h')

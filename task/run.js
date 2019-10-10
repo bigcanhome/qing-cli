@@ -1,4 +1,4 @@
-const after = require('./task/after');
+const after = require('./after');
 module.exports = function(options) {
-  return options;
+  after(options);
 };

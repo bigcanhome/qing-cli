@@ -1,4 +1,6 @@
 module.exports = {
+  globalVar: 'qing', // jssdk
+
   domain: '', // watch模式用到的
 
   buildDist: '${root}/dist/build', // build模式输出目录

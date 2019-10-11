@@ -40,5 +40,6 @@ const browserList = ['iOS >= 8.1.2', 'Android >= 4.4', 'ie >= 9', ' > 0.25%'];
 module.exports = {
   ACTION,
   commands,
-  browserList
+  browserList,
+  envOPtionsName: 'QING_OPTIONS'
 };

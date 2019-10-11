@@ -1,28 +1,18 @@
-const run = require('./after');
-const { merge } = require('lodash');
-const { requireConfig } = require('../utils');
+const path = require('path');
+
+const run = require('./run');
+const after = require('./after');
 
 module.exports = function(options) {
-  const babelCfgArr = [];
-  const cssCfgArr = [];
-  if (options.params.isCurrDir) {
-    babelCfgArr.push([options.page, '../babel.config.js']);
-    babelCfgArr.push([options.page, './babel.config.js']);
-    cssCfgArr.push([options.page, '../postcss.config.js']);
-    cssCfgArr.push([options.page, './postcss.config.js']);
-  } else {
-    babelCfgArr.push([options.root, './babel.config.js']);
-    babelCfgArr.push([options.page, './babel.config.js']);
-    cssCfgArr.push([options.root, './postcss.config.js']);
-    cssCfgArr.push([options.page, './postcss.config.js']);
-  }
+  const { sys_root } = options;
+  options.webpackConfigFile = path.resolve(sys_root, 'webpack/index.js');
+  options.webpackBin = path.resolve(sys_root, 'node_modules/.bin/webpack');
+  options.webpackDevBin = path.resolve(sys_root, 'node_modules/.bin/webpack-dev-server');
 
-  const defaultBabelCfg = require('../config/default/babel.config')(options);
-  const babelCfg = merge(defaultBabelCfg, requireConfig(babelCfgArr).data);
-  options.babelCfg = babelCfg;
+  const processor = run(options);
 
-  const defaultPostCssCfg = require('../config/default/postcss.config')(options);
-  const cssCfg = merge(defaultPostCssCfg, requireConfig(cssCfgArr).data);
-  options.cssCfg = cssCfg;
-  run(options);
+  processor.on('close', CODE => {
+    console.log('close');
+    after(options, CODE);
+  });
 };

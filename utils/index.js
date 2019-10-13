@@ -54,15 +54,25 @@ function readFiles(dirname) {
 }
 
 function readWebpackConfig(dirname, webpack, config) {
-  const dirs = fs.readdirSync(path.resolve(dirname, './webpack/addon'));
+  if (!fs.existsSync(dirname)) return webpack;
+  const dirSt = fs.statSync(dirname);
+  if (dirSt.isFile()) {
+    webpack = require(dirname)(webpack, config);
+    return webpack;
+  }
+  const dirs = fs.readdirSync(dirname).sort((a, b) => {
+    const [, aIndex] = a.match(/\.(\d+)\.js$/) || [null, 0];
+    const [, bIndex] = b.match(/\.(\d+)\.js$/) || [null, 0];
+    return aIndex - bIndex;
+  });
   dirs.forEach(item => {
-    const itemPath = path.resolve(dirname, './webpack/addon', item);
+    const itemPath = path.resolve(dirname, item);
     const stats = fs.statSync(itemPath);
     if (stats.isFile()) {
       webpack = require(itemPath)(webpack, config);
     }
     if (stats.isDirectory()) {
-      webpack = readFiles(itemPath, path.resolve(itemPath, webpack, config));
+      webpack = readWebpackConfig(itemPath, webpack, config);
     }
   });
   return webpack;

@@ -35,6 +35,6 @@ module.exports = function(options) {
   }
   const cfg = merge(defaultCfg, getFileData.data);
   options.cfg = cfg;
-
+  log.success('QING配置读取成功！！');
   before(options);
 };

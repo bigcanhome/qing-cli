@@ -1,9 +1,9 @@
-const webpack = require('webpack');
-
+const path = require('path');
 const { getFromEnv, readWebpackConfig } = require('../utils');
 
 module.exports = function() {
-  const { env, action, root, cfg, page, sys_root } = getFromEnv();
+  const config = getFromEnv();
+  const { env, root, cfg, sys_root, page } = config;
   let webpackConf = {
     mode: env,
     devtool: env !== 'production' ? 'cheap-eval-source-map' : 'none',
@@ -12,18 +12,16 @@ module.exports = function() {
     externals: cfg.externals,
     module: {},
     resolve: {},
-    plugins: [
-      new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/),
-      new webpack.optimize.ModuleConcatenationPlugin(),
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: env
-        }
-      })
-    ],
+    plugins: [],
     stats: { children: false }
   };
-  webpackConf = readWebpackConfig(sys_root, webpackConf, getFromEnv());
-  console.log(webpackConf);
+  webpackConf = readWebpackConfig(path.resolve(sys_root, './webpack/addon'), webpackConf, config);
+  /* 获取用户自定义 webpack 参数，自由度极高*/
+  webpackConf = readWebpackConfig(
+    path.resolve(page, './webpack.config.addon.js'),
+    webpackConf,
+    config
+  );
+  console.log(JSON.stringify(webpackConf));
   return webpackConf;
 };

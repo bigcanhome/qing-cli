@@ -5,19 +5,10 @@
 
 <br>
 
-[![NPM version][npm-image]][npm-url]
+## Function :
 
-## Description :
-
-Yargs helps you build interactive command line tools, by parsing arguments and generating an elegant user interface.
-
-It gives you:
-
-- commands and (grouped) options (`my-program.js serve --port=5000`).
-- a dynamically generated help menu based on your arguments.
-
-- bash-completion shortcuts for commands and options.
-- and [tons more](/docs/api.md).
+- ts,js
+-
 
 ## Installation
 
@@ -28,7 +19,5 @@ npm i qing-cli -g
 ```
 
 ## Usage :
-
-### Build
 
 ### JS-SDK

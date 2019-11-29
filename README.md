@@ -1,15 +1,20 @@
-# qing-cli
+<h1 align="center"> Qing </h1>
+<p align="center">
+  <b >Qing be a CLI</b>
+</p>
 
-## 基本功能
+<br>
 
-> - webpack
-> - babel转换
-> - polyfill
-> - less, sass 支持
-> - 代码的压缩混淆
-> - 图片压缩
-> - 多种模板的支持(自行扩展)
-> - 主流框架的支持（需要使用相应模板）
-> - 灵活配置
-> - 文件和目录的约束
+## Function :
 
+## -
+
+## Installation
+
+```bash
+npm i qing-cli -g
+```
+
+## Usage :
+
+### JS-SDK
